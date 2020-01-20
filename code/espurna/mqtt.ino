@@ -354,7 +354,7 @@ void _mqttConfigure() {
         bool retain = getSetting("mqttRetain", MQTT_RETAIN).toInt() == 1;
         unsigned long keepalive = getSetting("mqttKeep", MQTT_KEEPALIVE).toInt();
 
-        String id = getSetting("mqttClientID", getIdentifier());
+        String id = getSetting("mqttClientID", getSetting("hostname"));
         _mqttPlaceholders(id);
 
         _mqttApplySetting(_mqtt_user, user);
