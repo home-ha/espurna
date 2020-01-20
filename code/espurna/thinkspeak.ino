@@ -18,6 +18,27 @@ Copyright (C) 2019 by Xose Pérez <xose dot perez at gmail dot com>
 
 #define THINGSPEAK_DATA_BUFFER_SIZE 256
 
+#ifndef LEWEI_SUPPORT
+#define LEWEI_SUPPORT 0
+#endif
+
+#if LEWEI_SUPPORT
+#undef THINGSPEAK_URL
+#undef THINGSPEAK_HOST
+#undef THINGSPEAK_MIN_INTERVAL
+#define THINGSPEAK_URL "/api/V1/Gateway/UpdateSensors"
+#define THINGSPEAK_HOST "www.lewei50.com"
+#define THINGSPEAK_MIN_INTERVAL 300000
+
+const char THINGSPEAK_REQUEST_TEMPLATE[] PROGMEM =
+    "POST %s/%02d HTTP/1.1\r\n"
+    "Host: %s\r\n"
+    //"User-Agent: ESPurna\r\n"
+    //"Connection: close\r\n"
+    "userkey: %s\r\n"
+    //"Content-Type: application/x-www-form-urlencoded\r\n"
+    "Content-Length: %d\r\n\r\n";
+#else
 const char THINGSPEAK_REQUEST_TEMPLATE[] PROGMEM =
     "POST %s HTTP/1.1\r\n"
     "Host: %s\r\n"
@@ -25,6 +46,7 @@ const char THINGSPEAK_REQUEST_TEMPLATE[] PROGMEM =
     "Connection: close\r\n"
     "Content-Type: application/x-www-form-urlencoded\r\n"
     "Content-Length: %d\r\n\r\n";
+#endif
 
 bool _tspk_enabled = false;
 bool _tspk_clear = false;
@@ -169,9 +191,13 @@ void _tspkInitClient() {
                         if (!p) return;
                     }
 
+#if LEWEI_SUPPORT
+                    unsigned int code = strstr(p, "\"\"Successful\":true") != NULL;
+                    DEBUG_MSG_P(PSTR("[THINGSPEAK] Response value: %s\n"), p+4);
+#else
                     unsigned int code = (p) ? atoi(&p[4]) : 0;
                     DEBUG_MSG_P(PSTR("[THINGSPEAK] Response value: %u\n"), code);
-
+#endif
                     if ((0 == code) && _tspk_tries) {
                         _tspk_flush = true;
                         DEBUG_MSG_P(PSTR("[THINGSPEAK] Re-enqueuing %u more time(s)\n"), _tspk_tries);
@@ -205,6 +231,32 @@ void _tspkInitClient() {
             }
         #endif
 
+#if LEWEI_SUPPORT
+        String tspkKey = getSetting("tspkKey");
+        unsigned int device_id;
+        const char *key = tspkKey.c_str();
+        //DEBUG_MSG_P(PSTR("[THINGSPEAK] key=%s\n"), key);
+        const char *userkey = strchr(key, '@');
+        if (userkey == NULL) {
+            userkey = key;
+            device_id = 1;
+        } else {
+            userkey++;
+            device_id = atoi(key);
+        }
+        DEBUG_MSG_P(PSTR("[THINGSPEAK] POST %s/%02d?%s\n"), THINGSPEAK_URL, device_id, data.c_str());
+
+        char headers[128 + strlen_P(THINGSPEAK_REQUEST_TEMPLATE) + strlen(THINGSPEAK_URL) + strlen(THINGSPEAK_HOST) + data.length()];
+        snprintf_P(headers, sizeof(headers),
+            THINGSPEAK_REQUEST_TEMPLATE,
+            THINGSPEAK_URL,
+            device_id,
+            THINGSPEAK_HOST,
+            userkey,
+            data.length()
+        );
+        //DEBUG_MSG_P(PSTR("[THINGSPEAK] %s\n"), headers);
+#else
         DEBUG_MSG_P(PSTR("[THINGSPEAK] POST %s?%s\n"), THINGSPEAK_URL, _tspk_data.c_str());
         char headers[strlen_P(THINGSPEAK_REQUEST_TEMPLATE) + strlen(THINGSPEAK_URL) + strlen(THINGSPEAK_HOST) + 1];
         snprintf_P(headers, sizeof(headers),
@@ -213,6 +265,7 @@ void _tspkInitClient() {
             THINGSPEAK_HOST,
             _tspk_data.length()
         );
+#endif
 
         client->write(headers);
         client->write(_tspk_data.c_str());
@@ -276,8 +329,13 @@ void _tspkPost() {
 
         String response = _tspk_client.readString();
         int pos = response.indexOf("\r\n\r\n");
+#if LEWEI_SUPPORT
+        unsigned int code = response.indexOf("\"\"Successful\":true") > 0;
+        DEBUG_MSG_P(PSTR("[THINGSPEAK] Response value: %s\n"), (pos > 0) ? (char *)(response.substring(pos + 4)) : "NULL");
+#else
         unsigned int code = (pos > 0) ? response.substring(pos + 4).toInt() : 0;
         DEBUG_MSG_P(PSTR("[THINGSPEAK] Response value: %u\n"), code);
+#endif
         _tspk_client.stop();
 
         _tspk_last_flush = millis();
