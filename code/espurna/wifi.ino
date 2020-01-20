@@ -37,7 +37,7 @@ struct wifi_scan_info_t {
 void _wifiUpdateSoftAP() {
     if (WiFi.softAPgetStationNum() == 0) {
         #if USE_PASSWORD
-            jw.setSoftAP(getSetting("hostname").c_str(), getAdminPass().c_str());
+            jw.setSoftAP(getSetting("hostname").c_str(), (strlen(ADMIN_PASS) >= 8) ? getAdminPass().c_str() : NULL);
         #else
             jw.setSoftAP(getSetting("hostname").c_str());
         #endif
