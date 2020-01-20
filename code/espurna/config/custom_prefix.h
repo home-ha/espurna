@@ -36,7 +36,5 @@
 #define RELAY_MQTT_ON               "ON"
 #define RELAY_MQTT_OFF              "OFF"
 
-#define HOMEASSISTANT_PAYLOAD_ON    "ON"
-#define HOMEASSISTANT_PAYLOAD_OFF   "OFF"
-#define HOMEASSISTANT_PAYLOAD_AVAILABLE     "online"
-#define HOMEASSISTANT_PAYLOAD_NOT_AVAILABLE "offline"
+#define MQTT_STATUS_ONLINE          "online"
+#define MQTT_STATUS_OFFLINE         "offline"

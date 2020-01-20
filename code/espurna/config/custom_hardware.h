@@ -42,9 +42,9 @@
     // #define PMS_SMART_SLEEP         1
     // #define PMS_USE_SOFT            1
 
-    // #define SENSEAIR_SUPPORT        1
-    // #define SENSEAIR_RX_PIN         1
-    // #define SENSEAIR_TX_PIN         3
+    #define SENSEAIR_SUPPORT        1
+    #define SENSEAIR_RX_PIN         1
+    #define SENSEAIR_TX_PIN         3
 
 #elif NODEMCU_ID == 2
     #undef THINGSPEAK_SUPPORT
