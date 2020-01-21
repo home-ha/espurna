@@ -71,9 +71,9 @@
     #define DHT_TYPE                DHT_CHIP_DHT11
 
     #define DIGITAL_SUPPORT         1
-    #define DIGITAL_PIN             4
-    #define DIGITAL_PIN_MODE        INPUT
-    #define DIGITAL_DEFAULT_STATE   0
+    #define DIGITAL1_PIN            4
+    #define DIGITAL1_PIN_MODE       INPUT
+    #define DIGITAL1_DEFAULT_STATE  0
 
 #elif NODEMCU_ID == 4
     #define IR_SUPPORT              1
@@ -124,9 +124,9 @@
     #define ANALOG_DECIMALS         0
 
     #define DIGITAL_SUPPORT         1
-    #define DIGITAL_PIN             13
-    #define DIGITAL_PIN_MODE        INPUT
-    #define DIGITAL_DEFAULT_STATE   0
+    #define DIGITAL1_PIN            13
+    #define DIGITAL1_PIN_MODE       INPUT
+    #define DIGITAL1_DEFAULT_STATE  0
     #define DIGITAL2_PIN            15
     #define DIGITAL2_PIN_MODE       INPUT
     #define DIGITAL2_DEFAULT_STATE  1
