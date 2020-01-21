@@ -789,9 +789,8 @@ RelayStatus relayParsePayload(const char * payload) {
 
     // Check most commonly used payloads
     if (len == 1) {
-        if (payload[0] == '0') return RelayStatus::OFF;
-        if (payload[0] == '1') return RelayStatus::ON;
-        if (payload[0] == '2') return RelayStatus::TOGGLE;
+        if (payload[0] >= '0' && payload[0] <= '9')
+            return (RelayStatus)(payload[0] - '0');
         return RelayStatus::UNKNOWN;
     }
 
@@ -1375,7 +1374,7 @@ void relayMQTTCallback(unsigned int type, const char * topic, const char * paylo
             // Get value
             auto value = relayParsePayload(payload);
             #if RELAY_PROVIDER == RELAY_PROVIDER_JBL
-                if (value == 2 && payload[0] != '2' && _relays[0].current_status)
+                if (value == RelayStatus::TOGGLE && payload[0] != '2' && _relays[0].current_status)
                 {
                     DEBUG_MSG_P(PSTR("[RELAY] MQTT jblSource => %d\n"), _jblSource);
                     _relays[0].current_status = false;
@@ -1383,7 +1382,7 @@ void relayMQTTCallback(unsigned int type, const char * topic, const char * paylo
             #elif RELAY_PROVIDER == RELAY_PROVIDER_SHARP
                 if (payload[0] >= '1' && payload[0] <= '0' + RELAY_PROVIDER_SHARP_MODE_COUNT)
                 {
-                    value = 1;
+                    value = RelayStatus::ON;
                     _sharpTargetMode = payload[0] - '0';
                     #if NODEMCU_ID == 4
                         _sharp4LastStatus = _relays[0].current_status;
