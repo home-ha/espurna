@@ -244,16 +244,16 @@ void _tspkInitClient() {
             userkey++;
             device_id = atoi(key);
         }
-        DEBUG_MSG_P(PSTR("[THINGSPEAK] POST %s/%02d?%s\n"), THINGSPEAK_URL, device_id, data.c_str());
+        DEBUG_MSG_P(PSTR("[THINGSPEAK] POST %s/%02d?%s\n"), THINGSPEAK_URL, device_id, _tspk_data.c_str());
 
-        char headers[128 + strlen_P(THINGSPEAK_REQUEST_TEMPLATE) + strlen(THINGSPEAK_URL) + strlen(THINGSPEAK_HOST) + data.length()];
+        char headers[128 + strlen_P(THINGSPEAK_REQUEST_TEMPLATE) + strlen(THINGSPEAK_URL) + strlen(THINGSPEAK_HOST) + _tspk_data.length()];
         snprintf_P(headers, sizeof(headers),
             THINGSPEAK_REQUEST_TEMPLATE,
             THINGSPEAK_URL,
             device_id,
             THINGSPEAK_HOST,
             userkey,
-            data.length()
+            _tspk_data.length()
         );
         //DEBUG_MSG_P(PSTR("[THINGSPEAK] %s\n"), headers);
 #else
