@@ -155,9 +155,9 @@
     #define BUTTON3_PIN             3
     #define BUTTON3_MODE            BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
     #define BUTTON3_RELAY           2
-    #define RELAY2_PIN              20
-    #define RELAY2_TYPE             RELAY_TYPE_NORMAL
-#elif SONOFF_ID == 3
+    //#define RELAY2_PIN              20
+    //#define RELAY2_TYPE             RELAY_TYPE_NORMAL
+#elif SONOFF_ID == 2
     #undef BUTTON2_PIN
     #define BUTTON2_PIN             GPIO_NONE
     #undef RELAY2_PIN
