@@ -152,11 +152,17 @@
     #define SENSEAIR_RX_PIN         1
     #define SENSEAIR_TX_PIN         3
 #elif SONOFF_ID == 1
+    #define RELAY2_PIN              20 // Fake GPIO
+    #define RELAY2_TYPE             RELAY_TYPE_NORMAL
     #define BUTTON3_PIN             3
     #define BUTTON3_MODE            BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
-    #define BUTTON3_RELAY           2
-    //#define RELAY2_PIN              20
-    //#define RELAY2_TYPE             RELAY_TYPE_NORMAL
+    #define BUTTON3_RELAY           2 // Button3 -> Relay2 (Built-in Button1/2->Relay1)
+
+    #define RELAY3_PIN              21 // Fake GPIO
+    #define RELAY3_TYPE             RELAY_TYPE_NORMAL
+    #define BUTTON4_PIN             1
+    #define BUTTON4_MODE            BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+    #define BUTTON4_RELAY           3 // Button4 -> Relay3
 #elif SONOFF_ID == 2
     #undef BUTTON2_PIN
     #define BUTTON2_PIN             GPIO_NONE
@@ -202,10 +208,10 @@
     #undef LED1_PIN_INVERSE
     #define LED1_PIN_INVERSE        0
 
-    #if HASSMART_ID == 2 || HASSMART_ID == 4 || HASSMART_ID == 6
+    #if HASSMART_ID == 1 || HASSMART_ID == 2 || HASSMART_ID == 3
         #undef BUTTON3_PIN
         #define BUTTON3_PIN         GPIO_NONE
-    #elif HASSMART_ID == 1 || HASSMART_ID == 3 || HASSMART_ID == 5
+    #elif HASSMART_ID == 4 || HASSMART_ID == 5 || HASSMART_ID == 6
         #undef BUTTON3_PIN
         #define BUTTON3_PIN         2
         #undef BUTTON3_RELAY
