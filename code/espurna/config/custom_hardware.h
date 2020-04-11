@@ -103,7 +103,7 @@
 #elif NODEMCU_ID == 6
     #define RELAY1_MODE_PIN         5
     #define RELAY1_PIN              4
-    #define RELAY2_PIN              1
+    #define RELAY2_PIN              0
     #define RELAY1_OFF_PIN          2
     #define RELAY_PROVIDER          RELAY_PROVIDER_SHARP
     #define RELAY_PROVIDER_SHARP_TRIGGER LOW
