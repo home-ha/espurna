@@ -127,9 +127,9 @@
     #define DIGITAL1_PIN            13
     #define DIGITAL1_PIN_MODE       INPUT
     #define DIGITAL1_DEFAULT_STATE  0
-    #define DIGITAL2_PIN            15
-    #define DIGITAL2_PIN_MODE       INPUT
-    #define DIGITAL2_DEFAULT_STATE  1
+    // #define DIGITAL2_PIN            15
+    // #define DIGITAL2_PIN_MODE       INPUT
+    // #define DIGITAL2_DEFAULT_STATE  1
     
 #elif NODEMCU_ID == 7
     #undef THINGSPEAK_SUPPORT    
