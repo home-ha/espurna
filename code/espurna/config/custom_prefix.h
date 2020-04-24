@@ -19,7 +19,7 @@
 #define WS_AUTHENTICATION           0
 
 #define MQTT_ENABLED                1
-#define MQTT_SERVER                 "Hassbian"
+#define MQTT_SERVER                 "Hass"
 
 //#define HEARTBEAT_ENABLED           0
 

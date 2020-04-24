@@ -10,7 +10,7 @@
 #undef SENSOR_READ_INTERVAL
 #define SENSOR_READ_INTERVAL        10
 #undef SENSOR_REPORT_EVERY
-#if defined(DIGITAL_SUPPORT) || defined(IR_RX_PIN)
+#if (defined(DIGITAL_SUPPORT) && DIGITAL_SUPPORT) || (defined(IR_RX_PIN) && IR_RX_PIN)
 #define SENSOR_REPORT_EVERY         1
 #else
 #define SENSOR_REPORT_EVERY         6

@@ -70,10 +70,14 @@
     #define DHT_PIN                 2
     #define DHT_TYPE                DHT_CHIP_DHT11
 
-    #define DIGITAL_SUPPORT         1
-    #define DIGITAL1_PIN            4
-    #define DIGITAL1_PIN_MODE       INPUT
-    #define DIGITAL1_DEFAULT_STATE  0
+    // #define DIGITAL_SUPPORT         1
+    // #define DIGITAL1_PIN            4
+    // #define DIGITAL1_PIN_MODE       INPUT
+    // #define DIGITAL1_DEFAULT_STATE  0
+
+    #define I2C_SDA_PIN             4
+    #define I2C_SCL_PIN             5
+    #define BH1750_SUPPORT          1
 
 #elif NODEMCU_ID == 4
     #define IR_SUPPORT              1
