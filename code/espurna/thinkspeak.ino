@@ -386,6 +386,19 @@ void _tspkFlush() {
     _tspk_data.reserve(THINGSPEAK_DATA_BUFFER_SIZE);
 
     // Walk the fields, numbered 1...THINGSPEAK_FIELDS
+#if LEWEI_SUPPORT
+    _tspk_data.concat("[");
+    unsigned char valid_count = 0;
+    for (unsigned char id=0; id<THINGSPEAK_FIELDS; id++) {
+        if (_tspk_queue[id] != NULL) {
+            if (valid_count++ > 0) _tspk_data.concat(",");
+            char buf[32] = {0};
+            snprintf_P(buf, sizeof(buf), PSTR("{'Name':'%u','Value':'%s'}"), (id + 1), _tspk_queue[id]);
+            _tspk_data.concat(buf);
+        }
+    }
+    _tspk_data.concat("]");
+#else
     for (unsigned char id=0; id<THINGSPEAK_FIELDS; id++) {
         if (_tspk_queue[id] != NULL) {
             if (_tspk_data.length() > 0) _tspk_data.concat("&");
@@ -394,11 +407,14 @@ void _tspkFlush() {
             _tspk_data.concat(buf);
         }
     }
+#endif
 
     // POST data if any
     if (_tspk_data.length()) {
+#if LEWEI_SUPPORT == 0
         _tspk_data.concat("&api_key=");
         _tspk_data.concat(getSetting("tspkKey", THINGSPEAK_APIKEY));
+#endif
         --_tspk_tries;
         _tspkPost();
     }
