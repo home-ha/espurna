@@ -18,11 +18,11 @@ Copyright (C) 2019 by Xose Pérez <xose dot perez at gmail dot com>
 
 #define THINGSPEAK_DATA_BUFFER_SIZE 256
 
-#ifndef LEWEI_SUPPORT
-#define LEWEI_SUPPORT 0
+#ifndef THINGSPEAK_LEWEI
+#define THINGSPEAK_LEWEI 0
 #endif
 
-#if LEWEI_SUPPORT
+#if THINGSPEAK_LEWEI
 #undef THINGSPEAK_URL
 #undef THINGSPEAK_HOST
 #undef THINGSPEAK_MIN_INTERVAL
@@ -191,7 +191,7 @@ void _tspkInitClient() {
                         if (!p) return;
                     }
 
-#if LEWEI_SUPPORT
+#if THINGSPEAK_LEWEI
                     unsigned int code = strstr(p, "\"\"Successful\":true") != NULL;
                     DEBUG_MSG_P(PSTR("[THINGSPEAK] Response value: %s\n"), p+4);
 #else
@@ -231,7 +231,7 @@ void _tspkInitClient() {
             }
         #endif
 
-#if LEWEI_SUPPORT
+#if THINGSPEAK_LEWEI
         String tspkKey = getSetting("tspkKey");
         unsigned int device_id;
         const char *key = tspkKey.c_str();
@@ -329,7 +329,7 @@ void _tspkPost() {
 
         String response = _tspk_client.readString();
         int pos = response.indexOf("\r\n\r\n");
-#if LEWEI_SUPPORT
+#if THINGSPEAK_LEWEI
         unsigned int code = response.indexOf("\"\"Successful\":true") > 0;
         DEBUG_MSG_P(PSTR("[THINGSPEAK] Response value: %s\n"), (pos > 0) ? (char *)(response.substring(pos + 4)) : "NULL");
 #else
@@ -386,7 +386,7 @@ void _tspkFlush() {
     _tspk_data.reserve(THINGSPEAK_DATA_BUFFER_SIZE);
 
     // Walk the fields, numbered 1...THINGSPEAK_FIELDS
-#if LEWEI_SUPPORT
+#if THINGSPEAK_LEWEI
     _tspk_data.concat("[");
     unsigned char valid_count = 0;
     for (unsigned char id=0; id<THINGSPEAK_FIELDS; id++) {
@@ -411,7 +411,7 @@ void _tspkFlush() {
 
     // POST data if any
     if (_tspk_data.length()) {
-#if LEWEI_SUPPORT == 0
+#if THINGSPEAK_LEWEI == 0
         _tspk_data.concat("&api_key=");
         _tspk_data.concat(getSetting("tspkKey", THINGSPEAK_APIKEY));
 #endif
