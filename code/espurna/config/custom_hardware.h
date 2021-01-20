@@ -28,25 +28,6 @@
 
 
 #if NODEMCU_ID == 1
-    // #undef THINGSPEAK_SUPPORT
-    // #define THINGSPEAK_SUPPORT      1
-    // #define LEWEI_SUPPORT           1
-
-    // #define IR_SUPPORT              1
-    // #define IR_USE_RAW              1
-    // #define IR_RX_PIN               5
-    // #define IR_TX_PIN               4
-
-    // #define PMSX003_SUPPORT         1
-    // #define PMS_TYPE                PMS_TYPE_5003S
-    // #define PMS_SMART_SLEEP         1
-    // #define PMS_USE_SOFT            1
-
-    #define SENSEAIR_SUPPORT        1
-    #define SENSEAIR_RX_PIN         1
-    #define SENSEAIR_TX_PIN         3
-
-#elif NODEMCU_ID == 2
     #undef THINGSPEAK_SUPPORT
     #define THINGSPEAK_SUPPORT      1
     #define LEWEI_SUPPORT           1
@@ -54,7 +35,7 @@
     #define PMS_TYPE                PMS_TYPE_5003T
     #define PMS_SMART_SLEEP         1
     #define PMS_USE_SOFT            1
-#elif NODEMCU_ID == 3
+#elif NODEMCU_ID == 2
     #define RELAY1_PIN              15
     #define RELAY1_RESET_PIN        15
     #define RELAY1_TYPE             RELAY_TYPE_LATCHED
@@ -79,7 +60,7 @@
     #define I2C_SCL_PIN             5
     #define BH1750_SUPPORT          1
 
-#elif NODEMCU_ID == 4
+#elif NODEMCU_ID == 3
     #define IR_SUPPORT              1
     #define IR_RX_PIN               5
     #define IR_TX_PIN               4
@@ -97,14 +78,14 @@
     // #define DHT_PIN                 2
     // #define DHT_TYPE                DHT_CHIP_DHT11
 
-#elif NODEMCU_ID == 5
+#elif NODEMCU_ID == 4
     #define RELAY1_MODE_PIN         5
     #define RELAY1_PIN              4
     #define RELAY2_PIN              0
     #define RELAY1_OFF_PIN          2
     #define RELAY_PROVIDER          RELAY_PROVIDER_SHARP
     #define RELAY_PROVIDER_SHARP_TRIGGER LOW
-#elif NODEMCU_ID == 6
+#elif NODEMCU_ID == 5
     #define RELAY1_MODE_PIN         5
     #define RELAY1_PIN              4
     #define RELAY2_PIN              0
@@ -135,7 +116,7 @@
     // #define DIGITAL2_PIN_MODE       INPUT
     // #define DIGITAL2_DEFAULT_STATE  1
     
-#elif NODEMCU_ID == 7
+#elif NODEMCU_ID == 6
     #undef THINGSPEAK_SUPPORT    
     #define THINGSPEAK_SUPPORT      1
     #define LEWEI_SUPPORT           1
@@ -151,6 +132,24 @@
     #define PMS_TYPE                PMS_TYPE_5003ST
     #define PMS_SMART_SLEEP         1
     #define PMS_USE_SOFT            1
+
+    #define SENSEAIR_SUPPORT        1
+    #define SENSEAIR_RX_PIN         1
+    #define SENSEAIR_TX_PIN         3
+#elif NODEMCU_ID == 7
+    // #undef THINGSPEAK_SUPPORT
+    // #define THINGSPEAK_SUPPORT      1
+    // #define LEWEI_SUPPORT           1
+
+    // #define IR_SUPPORT              1
+    // #define IR_USE_RAW              1
+    // #define IR_RX_PIN               5
+    // #define IR_TX_PIN               4
+
+    // #define PMSX003_SUPPORT         1
+    // #define PMS_TYPE                PMS_TYPE_5003S
+    // #define PMS_SMART_SLEEP         1
+    // #define PMS_USE_SOFT            1
 
     #define SENSEAIR_SUPPORT        1
     #define SENSEAIR_RX_PIN         1
