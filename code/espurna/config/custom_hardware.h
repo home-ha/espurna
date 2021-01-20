@@ -35,6 +35,7 @@
     #define PMS_TYPE                PMS_TYPE_5003T
     #define PMS_SMART_SLEEP         1
     #define PMS_USE_SOFT            1
+    #define THINGSPEAK_APIKEY       THINGSPEAK_APIKEY1
 #elif NODEMCU_ID == 2
     #define RELAY1_PIN              15
     #define RELAY1_RESET_PIN        15
@@ -119,6 +120,7 @@
 #elif NODEMCU_ID == 6
     #undef THINGSPEAK_SUPPORT    
     #define THINGSPEAK_SUPPORT      1
+    #define THINGSPEAK_APIKEY       THINGSPEAK_APIKEY6
     #define LEWEI_SUPPORT           1
 
     #define RELAY1_MODE_PIN         5
