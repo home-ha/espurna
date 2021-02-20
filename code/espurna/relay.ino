@@ -210,8 +210,8 @@ void _relaySyncUnlock() {
     unsigned char _sharpCurrentMode = 1;
     unsigned char _sharpTargetMode = 1;
     #define RELAY_PROVIDER_SHARP_MODE_COUNT 6
-    #if NODEMCU_ID == 4
-        bool _sharp4LastStatus = false;
+    #if NODEMCU_ID == 3
+        bool _sharp3LastStatus = false;
         #undef RELAY_PROVIDER_SHARP_MODE_COUNT
         #define RELAY_PROVIDER_SHARP_MODE_COUNT 3
     #endif
@@ -362,8 +362,8 @@ void _relayProviderStatus(unsigned char id, bool status) {
                 pin = RELAY2_PIN;
             }
         #elif NODEMCU_ID == 3
-            pin = (id == 0 && status && _sharp4LastStatus) ? GPIO_NONE : _relays[id].pin;
-            _sharp4LastStatus = status;
+            pin = (id == 0 && status && _sharp3LastStatus) ? GPIO_NONE : _relays[id].pin;
+            _sharp3LastStatus = status;
         #else //if NODEMCU_ID == 4 || NODEMCU_ID == 5
             if (id == 0) {
                 if (status) {
@@ -1385,7 +1385,7 @@ void relayMQTTCallback(unsigned int type, const char * topic, const char * paylo
                     value = RelayStatus::ON;
                     _sharpTargetMode = payload[0] - '0';
                     #if NODEMCU_ID == 3
-                        _sharp4LastStatus = _relays[0].current_status;
+                        _sharp3LastStatus = _relays[0].current_status;
                     #endif
                     _relays[0].current_status = false;
                     DEBUG_MSG_P(PSTR("[RELAY] MQTT set sharpTargetMode %d=>%d\n"), _sharpCurrentMode, _sharpTargetMode);
