@@ -299,6 +299,50 @@
     #define SENSOR_SUPPORT              0
     #define THINGSPEAK_SUPPORT          0
 
+#elif defined(PHICOMM_DC1)
+
+    // Info
+    #define MANUFACTURER        "PHICOMM"
+    #define DEVICE              "DC1"
+
+    // #define CAT9554_SDA_PIN     3
+    // #define CAT9554_SCL_PIN     12
+    // #define CAT9554_IRQ_PIN     4
+
+    // Buttons
+    #define BUTTON1_PIN         16 // 总开关
+    #define BUTTON2_PIN         0  // 开关1
+    #define BUTTON3_PIN         1  // 开关2
+    #define BUTTON4_PIN         2  // 开关3
+    #define BUTTON1_MODE        BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+    #define BUTTON2_MODE        BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+    #define BUTTON3_MODE        BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+    #define BUTTON4_MODE        BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+    #define BUTTON1_RELAY       1
+    #define BUTTON2_RELAY       2
+    #define BUTTON1_RELAY       3
+    #define BUTTON2_RELAY       4
+
+    // Relays
+    #define RELAY1_PIN          7 // 总继电器
+    #define RELAY2_PIN          6 // 继电器1
+    #define RELAY3_PIN          5 // 继电器2
+    #define RELAY4_PIN          4 // 继电器3
+    // #define RELAY1_TYPE         RELAY_TYPE_NORMAL
+    // #define RELAY2_TYPE         RELAY_TYPE_NORMAL
+    // #define RELAY3_TYPE         RELAY_TYPE_NORMAL
+    // #define RELAY4_TYPE         RELAY_TYPE_NORMAL
+
+    // LEDs
+    #define LED1_PIN            0 // 指示灯
+    //#define LED1_PIN_INVERSE    0
+    #define LED1_PIN            14 // LOGO
+    //#define LED1_PIN_INVERSE    0
+
+    // CSE7766
+    #define CSE7766_SUPPORT     1
+    #define CSE7766_PIN         13
+
 // -----------------------------------------------------------------------------
 // Itead Studio boards
 // -----------------------------------------------------------------------------
