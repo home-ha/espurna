@@ -76,6 +76,12 @@
     #define MHZ19_RX_PIN            3
     #define MHZ19_TX_PIN            1
 
+    #undef THINGSPEAK_SUPPORT
+    #define THINGSPEAK_SUPPORT      1
+    #define THINGSPEAK_ENABLED      1
+    #define THINGSPEAK_LEWEI        1
+    #define THINGSPEAK_APIKEY       THINGSPEAK_APIKEY1
+
     // #define DHT_SUPPORT             1
     // #define DHT_PIN                 2
     // #define DHT_TYPE                DHT_CHIP_DHT11
