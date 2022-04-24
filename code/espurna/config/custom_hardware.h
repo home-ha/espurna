@@ -45,9 +45,9 @@
 
     #define RELAY_PROVIDER          RELAY_PROVIDER_JBL
 
-    // #define MHZ19_SUPPORT           1
-    // #define MHZ19_RX_PIN            3
-    // #define MHZ19_TX_PIN            1
+    #define MHZ19_SUPPORT           1
+    #define MHZ19_RX_PIN            3
+    #define MHZ19_TX_PIN            1
 
     #define DHT_SUPPORT             1
     #define DHT_PIN                 2
