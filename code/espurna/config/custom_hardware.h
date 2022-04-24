@@ -38,6 +38,12 @@
     #define PMS_SMART_SLEEP         1
     #define PMS_USE_SOFT            1
 #elif NODEMCU_ID == 2
+    #undef THINGSPEAK_SUPPORT
+    #define THINGSPEAK_SUPPORT      1
+    #define THINGSPEAK_ENABLED      1
+    #define THINGSPEAK_LEWEI        1
+    #define THINGSPEAK_APIKEY       THINGSPEAK_APIKEY1
+
     #define RELAY1_PIN              15
     #define RELAY1_RESET_PIN        15
     #define RELAY1_TYPE             RELAY_TYPE_LATCHED
